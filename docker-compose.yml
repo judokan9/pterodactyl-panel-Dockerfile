@@ -1,7 +1,7 @@
 version: '2'
 services:
   database:
-    hostname: pterodb
+    hostname: database
     image: mariadb:10
     expose:
       - "3306"
