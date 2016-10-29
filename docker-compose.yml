@@ -15,8 +15,8 @@ services:
       - "MYSQL_PASSWORD=pterodbpass"
   
   Panel-dev:
-    hostname: Panel-dev
-    image: parkervcp/pterodactyl-panel:latest
+    hostname: Panel
+    image: quay.io/parkervcp/pterodactyl-panel
     ports:
       - "80:80"
     tty: true
