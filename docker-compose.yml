@@ -14,8 +14,8 @@ services:
       - "MYSQL_USER=ptero"
       - "MYSQL_PASSWORD=pterodbpass"
   
-  Panel:
-    hostname: Panel
+  Panel-dev:
+    hostname: Panel-dev
     image: parkervcp/pterodactyl-panel:latest
     ports:
       - "80:80"
