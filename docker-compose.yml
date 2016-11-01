@@ -14,7 +14,7 @@ services:
       - "MYSQL_USER=ptero"
       - "MYSQL_PASSWORD=pterodbpass"
   
-  Panel-dev:
+  Panel:
     hostname: Panel
     image: quay.io/parkervcp/pterodactyl-panel
     ports:
