@@ -24,9 +24,9 @@ WORKDIR /var/www/html/
 RUN chmod +x /var/www/html/entrypoint.sh \
  && apk update \
  && apk add curl tar \
- && curl -Lo v0.5.5.tar.gz https://github.com/Pterodactyl/Panel/archive/v0.5.5.tar.gz \
- && tar --strip-components=1 -xzvf v0.5.5.tar.gz \
- && rm v0.5.5.tar.gz \
+ && curl -Lo v0.5.6.tar.gz https://github.com/Pterodactyl/Panel/archive/v0.5.6.tar.gz \
+ && tar --strip-components=1 -xzvf v0.5.6.tar.gz \
+ && rm v0.5.6.tar.gz \
  && chown -R nginx:nginx * \
  && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
  && composer install --ansi --no-dev
