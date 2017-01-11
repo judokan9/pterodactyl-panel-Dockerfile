@@ -47,6 +47,8 @@ if [ ! -e .env ]; then #Didn't find the .env file
         echo "Setting up user"
         php artisan pterodactyl:user --email=$admin_email --password=$admin_pass --admin=$admin_stat
 elif [ ! -s .env ]; then #found an empty .env file
+    echo "    Getting ready to start. Waiting 15 seconds for mariadb to start if you are using docker compose"
+    sleep 15
     echo "      env empty"
     echo "      Generating new .env file"
     echo "      Generating application key"
@@ -91,26 +93,4 @@ elif [ ! -s .env ]; then #found an empty .env file
         php artisan pterodactyl:user --email=$admin_email --password=$admin_pass --admin=$admin_stat
 else # Found an env file and testing for panel version
     echo "      Found env file found. continuing start"
-  ##
-  ##   This is for future refference and panel upgrades
-  ##
-  #  if [ $(grep version:0.5.0-pre.[1-3] .env) ]; then ## Matched previous build
-  #      echo "      Previous version in this release found. Attempting upgrade"
-  #      env=$(cat .env)
-  #      printf "version:0.5.0-rc.2\n$env" > .env
-  #      echo "      Migrating Database"
-  #      php artisan migrate --force
-  #      env=$(cat .env)
-  #      printf "        version:0.5.0-pre.3\n$env" > .env
-  #  elif [ ! $(grep version .env) ]; then ## No version found 
-  #      echo "      No version found at head of env file. Setting version and attempting upgrade"
-  #      env=$(cat .env)
-  #      printf "version:0.5.0-rc.2\n$env" > .env
-  #      echo "      Migrating Database"
-  #      php artisan migrate --force
-  #  elif [ $(grep version:0.5.0-rc.1 .env) ]; then ## Fund matching version
-  #      echo '      The env file is for the current version the panel "should" work'
-  #  else ## If all else fails assume it works...
-  #      echo "      There was an error but I assume the env file is actually working"
-  #  fi
 fi

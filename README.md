@@ -9,11 +9,13 @@ Quay.io Build Status
 
 # Large UPDATE and changes
 
-I now use a smaller mariadb container based on alpine. This is a slightly changed copy of the one from bianjp/mariadb-alpine. I use alpine 3.5 and not latest for the base version.
+#### changes
+* Changed base mariadb container (smaller)  
+* Moved to caddyserver and tini  
+* Added Automatic SSL support (Can be disabled)  
+    Auto SSL certs are based on the admin_email and panel_url variables in the docker-compose file  
+    Adding auto SSL support doesn't work for everyone so I have added the ability to disable ssl. You just need to set ssl to false in the docker-compose file.
 
-I updated the Panel container to use 3.5 and now uses tini and caddy to start. This removed supervisord and cuts about 30 megs off the container.
-
-The main reason for the change is the use of https is now automatic. It will use the admin email set in the docker-compose to auth the ssl certs. The change in mariadb containers is to save on space by 100+ megs.
 
 
 ## Running the container

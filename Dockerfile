@@ -22,4 +22,4 @@ ENTRYPOINT ["/bin/ash", "/var/www/html/start.sh"]
 
 EXPOSE 80
 
-CMD ["tini", "--", "/usr/sbin/caddy", "-conf", "/etc/caddy/caddy.conf"]
+CMD ["/sbin/tini", "--", "/usr/sbin/caddy", "-conf", "/etc/caddy/caddy.conf"]
