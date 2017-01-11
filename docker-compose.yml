@@ -43,7 +43,4 @@ services:
       - "admin_email="
       - "admin_pass="
       - "admin_stat=1"
-      - "ssl_on=false"
-      - "ssl_crt="
-      - "ssl_key="
-      - "domain="
+      - "ssl=true"
