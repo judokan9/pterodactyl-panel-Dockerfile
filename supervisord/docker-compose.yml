@@ -2,7 +2,7 @@ version: '2'
 services:
   database:
     hostname: database
-    image: quay.io/parkervcp/mariadb-alpine:latest
+    image: mariadb:10
     expose:
       - "3306"
     restart: always
@@ -25,7 +25,6 @@ services:
       - database
     volumes:
       - "/srv/pterodactyl/.env:/var/www/html/.env"
-      - "/srv/pterodactyl/certs/:/srv/pterodactyl/certs/"
     environment:
       - "db_host=database"
       - "db_port=3306"
@@ -43,7 +42,3 @@ services:
       - "admin_email="
       - "admin_pass="
       - "admin_stat=1"
-      - "ssl_on=false"
-      - "ssl_crt="
-      - "ssl_key="
-      - "domain="

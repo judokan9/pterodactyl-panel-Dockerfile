@@ -6,6 +6,16 @@ Built from the stock [alpine linux](https://hub.docker.com/_/alpine/) using the 
 Quay.io Build Status  
 ![status badge](https://quay.io/repository/parkervcp/pterodactyl-panel/status)
 
+
+# Large UPDATE and changes
+
+I now use a smaller mariadb container based on alpine. This is a slightly changed copy of the one from bianjp/mariadb-alpine. I use alpine 3.5 and not latest for the base version.
+
+I updated the Panel container to use 3.5 and now uses tini and caddy to start. This removed supervisord and cuts about 30 megs off the container.
+
+The main reason for the change is the use of https is now automatic. It will use the admin email set in the docker-compose to auth the ssl certs. The change in mariadb containers is to save on space by 100+ megs.
+
+
 ## Running the container
 Pull the container  
 ```docker pull quay.io/parkervcp/pterodactyl-panel```
@@ -19,7 +29,7 @@ More info on docker-compose can be found [here](https://docs.docker.com/compose/
 ###When you first start the container you need to wait at least 1 minute for it to complete the final setup including the database configuration/seeding, email setup, and user generation.
 
 #####If you don't use docker-compose
-The container requires a database to run as well. I recommend the [mariadb conatiner](https://hub.docker.com/_/mariadb/). I start it with a command like this. Modify to your needs.  
+The container requires a database to run as well. I recommend the [mariadb conatiner](https://hub.docker.com/_/mariadb/) or [alpine mariadb container](https://github.com/bianjp/docker-mariadb-alpine). I start it with a command like this. Modify to your needs.  
 ```docker run -t -e MYSQL_ROOT_PASSWORD=apassword -e MYSQL_DATABASE=pterodb -e MYSQL_USER=ptero -e MYSQL_PASSWORD=pterodbpass --name pterodb -d mariadb:10```
 The container also requires a ton of env flags and that is why the docker-compose is the recommended way to run the container
 
