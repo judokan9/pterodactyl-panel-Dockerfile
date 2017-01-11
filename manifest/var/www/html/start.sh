@@ -2,7 +2,7 @@
 
 set -e
 
-if [ "$1" = 'tini' ]; then
+if [ "$1" = '/sbin/tini' ]; then
     if [ "$ssl" == "false" ]; then
         sed -i "s,https://,http://,g" /etc/caddy/caddy.conf
         sed -i "s,<domain>,$panel_url,g" /etc/caddy/caddy.conf
