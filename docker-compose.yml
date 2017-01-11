@@ -19,6 +19,7 @@ services:
     image: quay.io/parkervcp/pterodactyl-panel
     ports:
       - "80:80"
+      - "443:443"
     tty: true
     restart: always
     links:
