@@ -6,6 +6,18 @@ Built from the stock [alpine linux](https://hub.docker.com/_/alpine/) using the 
 Quay.io Build Status  
 ![status badge](https://quay.io/repository/parkervcp/pterodactyl-panel/status)
 
+
+# Large UPDATE and changes
+
+#### changes
+* Changed base mariadb container (smaller)  
+* Moved to caddyserver  
+* Added Automatic SSL support (Can be disabled)  
+    Auto SSL certs are based on the admin_email and panel_url variables in the docker-compose file  
+    Adding auto SSL support doesn't work for everyone so I have added the ability to disable ssl. You just need to set ssl to false in the docker-compose file.
+
+
+
 ## Running the container
 Pull the container  
 ```docker pull quay.io/parkervcp/pterodactyl-panel```
@@ -19,7 +31,7 @@ More info on docker-compose can be found [here](https://docs.docker.com/compose/
 ###When you first start the container you need to wait at least 1 minute for it to complete the final setup including the database configuration/seeding, email setup, and user generation.
 
 #####If you don't use docker-compose
-The container requires a database to run as well. I recommend the [mariadb conatiner](https://hub.docker.com/_/mariadb/). I start it with a command like this. Modify to your needs.  
+The container requires a database to run as well. I recommend the [mariadb conatiner](https://hub.docker.com/_/mariadb/) or [alpine mariadb container](https://github.com/bianjp/docker-mariadb-alpine). I start it with a command like this. Modify to your needs.  
 ```docker run -t -e MYSQL_ROOT_PASSWORD=apassword -e MYSQL_DATABASE=pterodb -e MYSQL_USER=ptero -e MYSQL_PASSWORD=pterodbpass --name pterodb -d mariadb:10```
 The container also requires a ton of env flags and that is why the docker-compose is the recommended way to run the container
 

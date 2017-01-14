@@ -2,7 +2,7 @@ version: '2'
 services:
   database:
     hostname: database
-    image: mariadb:10
+    image: quay.io/parkervcp/mariadb-alpine:latest
     expose:
       - "3306"
     restart: always
@@ -16,9 +16,10 @@ services:
   
   Panel:
     hostname: Panel
-    image: quay.io/parkervcp/pterodactyl-panel
+    image: quay.io/parkervcp/pterodactyl-panel:supervisord
     ports:
       - "80:80"
+      - "443:443"
     tty: true
     restart: always
     links:
@@ -42,3 +43,4 @@ services:
       - "admin_email="
       - "admin_pass="
       - "admin_stat=1"
+      - "ssl=true"
