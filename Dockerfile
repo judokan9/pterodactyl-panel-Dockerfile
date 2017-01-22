@@ -2,22 +2,26 @@ FROM alpine:3.5
 
 MAINTAINER Michael Parker, <parker@parkervcp.com>
 
-WORKDIR /var/www/html/
-
 RUN apk update \
- && apk add  openssl-dev php7 php7-bcmath php7-common php7-dom php7-fpm php7-gd php7-mbstring php7-openssl php7-pdo php7-phar php7-json php7-pdo_mysql php7-session php7-ctype curl tar tini caddy \
+ && apk add openssl-dev php7 php7-bcmath php7-common php7-dom php7-fpm php7-gd php7-mbstring php7-openssl php7-pdo php7-phar php7-json php7-pdo_mysql php7-session php7-ctype curl tar tini caddy zip unzip \
  && mv /usr/bin/php7 /usr/bin/php \
  && mv /usr/sbin/php-fpm7 /usr/sbin/php-fpm
 
 COPY ./manifest/ /
 
-RUN curl -Lo v0.5.6.tar.gz https://github.com/Pterodactyl/Panel/archive/v0.5.6.tar.gz \
- && tar --strip-components=1 -xzvf v0.5.6.tar.gz \
- && rm v0.5.6.tar.gz \
+WORKDIR /var/www/
+
+RUN curl -Lo develop.zip https://github.com/Pterodactyl/Panel/archive/develop.zip \
+ && unzip develop.zip \
+ && mv Panel-develop/* html/ \
+ && rm -rf Panel-develop/ \
+ && rm develop.zip \
  && chown -R caddy:caddy * \
  && chmod -R 777 storage/* bootstrap/cache \
  && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
  && composer install --ansi --no-dev
+
+WORKDIR /var/www/html/
 
 ENTRYPOINT ["/bin/ash", "/var/www/html/entrypoint.sh"]
 
