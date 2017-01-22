@@ -16,7 +16,7 @@ services:
   
   Panel:
     hostname: Panel
-    image: quay.io/parkervcp/pterodactyl-panel
+    image: quay.io/parkervcp/pterodactyl-panel:latest
     ports:
       - "80:80"
       - "443:443"
@@ -25,8 +25,8 @@ services:
     links:
       - database
     volumes:
-      - "/srv/pterodactyl/.env:/var/www/html/.env"
-      - "/srv/pterodactyl/certs/:/srv/pterodactyl/certs/"
+      - "/srv/pterodactyl/var/:/var/www/html/var/"
+      - "/srv/pterodactyl/certs/:/root/.caddy/"
     environment:
       - "db_host=database"
       - "db_port=3306"
