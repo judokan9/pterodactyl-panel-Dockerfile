@@ -2,9 +2,6 @@
 
 if [ "$1" = "/sbin/tini" ]; then
 
-    chmod -R 777 storage/*
-    chmod -R 777 bootstrap/cache
-    
     echo "container initializing"
     echo "setting up ssl settings"
     
