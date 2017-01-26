@@ -1,8 +1,10 @@
 #!/bin/ash
-set -e
 
 if [ "$1" = "/sbin/tini" ]; then
 
+    chmod -R 777 storage/*
+    chmod -R 777 bootstrap/cache
+    
     echo "container initializing"
     echo "setting up ssl settings"
     
@@ -20,11 +22,11 @@ if [ "$1" = "/sbin/tini" ]; then
     echo "continuing"
 
     if [ ! -e var/.env ] || [ ! -s var/.env ]; then #Didn't find the .env file
-        echo "      Getting ready to start. Waiting 15 seconds for mariadb to start if you are using docker compose"
-        sleep 15
+        echo "      Getting ready to start. Waiting 25 seconds for mariadb to start if you are using docker compose"
+        sleep 25
         echo "      env not found. Copying from example"
         if [ ! -e var/.env ]; then
-            touch var/.env
+            cp .env.example var/.env
         else
             echo "If you see this there was a major problem..."
         fi
@@ -62,7 +64,7 @@ if [ "$1" = "/sbin/tini" ]; then
             echo "      Seeding Database"
             php artisan db:seed --force
             echo "      Setting up user"
-            php artisan pterodactyl:user --email=$admin_email --password=$admin_pass --admin=$admin_stat
+            php artisan pterodactyl:user --firstname=$admin_first --lastname=$admin_last --username=$admin_user --email=$admin_email --password=$admin_pass --admin=$admin_stat
 
     else # Found an env file and testing for panel version
         echo "      Found env file found. continuing start"

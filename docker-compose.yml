@@ -16,7 +16,7 @@ services:
   
   Panel:
     hostname: Panel
-    image: quay.io/parkervcp/pterodactyl-panel:testing
+    image: quay.io/parkervcp/pterodactyl-panel:develop
     ports:
       - "80:80"
       - "443:443"
@@ -41,6 +41,9 @@ services:
       - "email_pass="
       - "email_domain="
       - "email_port="
+      - "admin_first="
+      - "admin_last="
+      - "admin_user="
       - "admin_email="
       - "admin_pass="
       - "admin_stat=1"
